@@ -1,0 +1,19 @@
+OBJS = functions.o Generating_bands.o
+CCC = g++
+OPT = -O3
+DEBUG = #-g3
+MKL_LIB = -L /usr/lib/lapack/liblapack.so.3 -L /usr/lib/libblas/libblas.so.3 -llapacke
+
+all : $(OBJS)
+	$(CCC) $(DEBUG) $(OBJS) -o Generating_bands_exe $(MKL_LIB)
+
+functions.o : functions.cpp
+	$(CCC) -c $(OPT) $(DEBUG) functions.cpp $(MKL_LIB)
+
+Generating_bands.o : Generating_bands.cpp
+	$(CCC) -c $(OPT) $(DEBUG) Generating_bands.cpp $(MKL_LIB)
+
+
+clean:
+	rm -f *.o *~ Generating_bands_exe
+
